@@ -1,73 +1,113 @@
+## Setting up Docker with PostgreSQL
+---
+### To run Docker with PostgreSQL, follow these steps:
 
 
-- Docker-Postgres
+1. Run the following command to createa and start a Docker container with PostgreSQL, specifying the desired - -  environmental variables and port:
 
-- runing docker with some enviromental varibles and postgres
+    `sudo docker run --name postgres-0 -e POSTGRES_PASSWORD=password -d -p 5432:5432 postgres:alpine`
 
-`sudo docker run --name postgres-0 -e POSTGRES_PASSWORD=password -d -p 5432:5432 postgres:alpine `
+2. To view the running Docker images, use the following command:
 
-- showing the images   : ` sudo docker ps`
-- showing the images includeing running containers  : ` sudo docker container ls -a`
-- start stopped container   : ` sudo docker container ls -a`
-    - if already porst is used : `sudo lsof -i :5432 ` kill it
-- run docker container prebuilt : `docker exec -it 92caf236958c /bin/bash` 
-- inside the images/ container , we'll use psql  : `psql -U postgres`
-- display user :  `\du`
-- list all db : `l`
-- create db : `create database`
-- use/connect db : `\c dbname` 
-- create table : `create table table_name`
+    `sudo docker ps`
+
+
+3. To view all images, including the running containers, use the following command:
+    
+    `sudo docker container ls -a`
+
+
+4. If a container is stopped, you can start it using the following command:
+    
+    ``sudo docker container start <container_id>``
+
+
+5. If the port is already in use, you can find the process using the following command and kill it:
+
+    `sudo lsof -i :5432`
+
+6. To run commands inside a prebuilt Docker container, use the following command:
+
+    ``docker exec -it <container_id> /bin/bash``
+
+
+7. Inside the container, you can use psql to interact with PostgreSQL:
+
+    `psql -U postgres`
+
+8. You can display all users using the following command:
+  `\du`
+
+9. To list all databases, use the following command: `` l ``
+
+10. To create a new database, use the following command: ``create database <dbname>;``
+
+11. To connect to a specific database, use the following command: ``\c <dbname>``
+12. To create a table, use the following command:
+    ```
+    CREATE TABLE users (
+      id SERIAL PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      email VARCHAR(255) NOT NULL,
+      age INTEGER NOT NULL
+    );
+
+    ```
+12. To display a table structure, use the following command:
+``\d <table_name>``
+
+13. To insert values into the table, use the following command:
+    
+    `insert into users(name, email, age) values ('Ayushi', 'ayushi@gmail.com', 22), ('Mayank raj', 'chikkuuu@gmail.com', 22);`
+
+15. To display the data inside the table, use the following command:
+`select * from users;`
+
+    The output should look like this:
 ```
-CREATE TABLE employee (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    salary DECIMAL(10,2) NOT NULL
-);
-
-
-```
-- display table : `\d table_name`
-
-
-- insert value : ```
-insert into employee (id,name,salary) values (3,'Ayushi',63778),(4,'Mayank',63778),(5,'ayushi soni',63778),(6,'Mayank raj',63778);```
-
-- show data inside table : 
+    id |    name    |       email       | age
+    ---+------------+-------------------+-----
+     3 | chikkuuu   | chikkuuu@gmail.com| 22
+     1 | Ayushi     | ayushi@gmail.com  | 22
+    (2 rows)
 
 ```
 
-select * from employee;
- id |    name     |  salary  
-----+-------------+----------
-  1 | ayu         | 65778.00
-  2 | chikkuuu    | 63778.00
-  5 | ayushi soni | 63778.00
-  6 | Mayank raj  | 63778.00
-(6 rows)
+# User Management System : Node js and Fasity 
+
+To build a Node.js API using the Fastify framework and PostgreSQL as the database for user management, follow these steps:
+
+
+Step 1: Set up the project
+
+  - Create a new directory for your project.
+  
+  - Initialize a new Node.js project by running the following command in your project directory:`npm init -y`
+
+  - Install the required dependencies: Fastify, pg, and any other necessary packages:
+   `npm install fastify pg`
+
+Step 2: Set up the PostgreSQL database
+
+  - Install PostgreSQL on your machine if you haven't already.
+  - Create a new PostgreSQL database for your project.
+
+Step 3: Create the API endpoints and database integration
+
+Create a new file, e.g., index.js, and set up the basic structure of your Fastify server.
+Import the necessary modules:
+```
+    const knex = require('knex')
+
+    module.exports = knex({
+    client: 'postgres',
+    connection: {
+        host: 'localhost',
+        user: 'postgres',
+        password: 'password',
+        database: 'test',
+    },
+})
 
 ```
-
-
-
-
-
-
-<!--   -->
-# User manage system :
-- Build a Node.js API using Fastify framework.
-- Use PostgreSQL as the database to store user information.
-- Implement the following endpoints:
-- POST /users - Create a new user.
-- GET /users - Retrieve a list of all users.
-- GET /users/:id - Retrieve a specific user by ID.
-- PUT /users/:id - Update an existing user.
-- DELETE /users/:id - Delete a user.
-- Each user should have the following properties:
-- Name (string)
-- Email (string)
-- Age (integer)
-- Implement database integration using a PostgreSQL library
-- Implement basic validation for the incoming user data:
-- Ensure that the required properties are present for create and update operations.
-- Validate the data types and format (e.g., email validation).
-- Implement error handling for invalid requests and database errors.
+## now make requests to the API endpoints using a tool like cURL or Postman.
