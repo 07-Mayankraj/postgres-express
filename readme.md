@@ -68,7 +68,7 @@
     id |    name    |       email       | age
     ---+------------+-------------------+-----
      3 | chikkuuu   | chikkuuu@gmail.com| 22
-     1 | Ayushi     | ayushi@gmail.com  | 22
+     1 | Ayu     | ayu@gmail.com  | 22
     (2 rows)
 
 ```
