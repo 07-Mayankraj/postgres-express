@@ -1,6 +1,5 @@
-const fastify = require('fastify')();
+const fastify = require('fastify')({logger : true});
 const db = require('./config/db');
-
 
 fastify.post('/users', async (request, reply) => {
     const { name, email, age } = request.body;
@@ -69,10 +68,13 @@ fastify.delete('/users/:id', async (request, reply) => {
 });
 
 // Start the server
-fastify.listen(3000, (err) => {
-    if (err) {
-        console.error(err);
+const start = async () => {
+    try {
+        await fastify.listen({port: 3000})
+    } catch (error) {
+        fastify.log.error(error)
         process.exit(1);
     }
-    console.log('Server running on port 3000');
-});
+} 
+
+start();

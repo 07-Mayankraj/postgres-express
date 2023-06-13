@@ -1,2 +1,13 @@
-### GEt
-GET http://localhost:3000/
+### get all users
+GET http://localhost:3000/users
+
+
+### add users
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "chikkuuu",
+  "email": "chikkuuu@gmail.com",
+  "age": 22
+}
