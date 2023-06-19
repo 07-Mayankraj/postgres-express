@@ -58,7 +58,7 @@
 
 13. To insert values into the table, use the following command:
     
-    `insert into users(name, email, age) values ('Ayushi', 'ayushi@gmail.com', 22), ('Mayank raj', 'chikkuuu@gmail.com', 22);`
+    `insert into users(name, email, age) values ('Ayu', 'ayu@gmail.com', 22), ('Mayank raj', 'chikkuuu@gmail.com', 22);`
 
 15. To display the data inside the table, use the following command:
 `select * from users;`
@@ -68,7 +68,7 @@
     id |    name    |       email       | age
     ---+------------+-------------------+-----
      3 | chikkuuu   | chikkuuu@gmail.com| 22
-     1 | Ayushi     | ayushi@gmail.com  | 22
+     1 | Ayu        | ayu@gmail.com  | 22
     (2 rows)
 
 ```
